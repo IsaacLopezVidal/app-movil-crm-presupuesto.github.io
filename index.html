@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta de Plataforma Digital | Agencia de Asesores de Seguros</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2c5282;
+            --accent-color: #3182ce;
+            --success-color: #38a169;
+            --warning-color: #d69e2e;
+            --danger-color: #e53e3e;
+            --text-dark: #1a202c;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+            --bg-gradient: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Scroll Snap Container */
+        .presentation {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        /* Each Slide */
+        .slide {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .slide-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary-color);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            margin-bottom: 1rem;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 0.3rem;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            margin-bottom: 0.8rem;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        /* Title Slide */
+        .slide.title-slide {
+            background: var(--bg-gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .slide.title-slide h1,
+        .slide.title-slide p {
+            color: white;
+        }
+
+        .title-slide .logo {
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .title-slide .tagline {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            margin-top: 1.5rem;
+            padding: 1rem 2rem;
+            background: rgba(255,255,255,0.15);
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        /* Final Slide */
+        .slide.final-slide {
+            background: var(--bg-gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .slide.final-slide h2 {
+            color: white;
+            border-bottom-color: rgba(255,255,255,0.5);
+        }
+
+        .slide.final-slide p {
+            color: rgba(255,255,255,0.95);
+        }
+
+        .final-slide .message-box {
+            background: rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .final-icons-grid {
+            display: flex;
+            justify-content: center;
+            gap: clamp(1.5rem, 4vw, 3rem);
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .final-icon-item {
+            text-align: center;
+        }
+
+        .final-icon-item i {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .final-icon-item p {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+        }
+
+        /* Cards */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .card-container.cards-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--accent-color);
+            text-align: left;
+        }
+
+        .card.highlight {
+            border-top-color: var(--success-color);
+            background: linear-gradient(to bottom, #f0fff4, white);
+        }
+
+        .card.warning {
+            border-top-color: var(--warning-color);
+            background: linear-gradient(to bottom, #fffaf0, white);
+        }
+
+        .card.danger {
+            border-top-color: var(--danger-color);
+            background: linear-gradient(to bottom, #fff5f5, white);
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .card h3 {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            font-size: clamp(0.85rem, 1.8vw, 1rem);
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+
+        .card ul {
+            margin: 0.5rem 0 0 0;
+            padding-left: 1.2rem;
+        }
+
+        .card li {
+            font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #ebf8ff, #e6fffa);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .highlight-box.warning {
+            background: linear-gradient(135deg, #fffaf0, #fefcbf);
+            border-left-color: var(--warning-color);
+        }
+
+        .highlight-box.success {
+            background: linear-gradient(135deg, #f0fff4, #c6f6d5);
+            border-left-color: var(--success-color);
+        }
+
+        .highlight-box.danger {
+            background: linear-gradient(135deg, #fff5f5, #fed7d7);
+            border-left-color: var(--danger-color);
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-size: clamp(0.85rem, 1.8vw, 1rem);
+        }
+
+        .highlight-box h4 {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .highlight-box ul {
+            margin: 0.5rem 0 0 0;
+            padding-left: 1.2rem;
+        }
+
+        .highlight-box li {
+            font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+            margin-bottom: 0.3rem;
+        }
+
+        /* Two Columns */
+        .two-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .column {
+            min-width: 0;
+        }
+
+        /* Icon List */
+        .icon-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .icon-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+            font-size: clamp(0.85rem, 1.8vw, 1rem);
+        }
+
+        .icon-list li i {
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+            width: 1.5rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .icon-list li strong {
+            display: block;
+            margin-bottom: 0.2rem;
+            color: var(--text-dark);
+        }
+
+        .icon-list li span {
+            color: var(--text-light);
+            font-size: 0.9em;
+        }
+
+        /* Value Items */
+        .value-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .value-item i {
+            font-size: 1.8rem;
+            color: var(--success-color);
+            flex-shrink: 0;
+        }
+
+        .value-item .content h4 {
+            margin: 0 0 0.2rem 0;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: var(--primary-color);
+        }
+
+        .value-item .content p {
+            margin: 0;
+            font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+            color: var(--text-light);
+        }
+
+        /* Architecture Diagram */
+        .architecture-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .arch-layer {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .arch-box {
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            min-width: 120px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .arch-box.mobile {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .arch-box.web {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+        }
+
+        .arch-box.backend {
+            background: linear-gradient(135deg, #ee0979, #ff6a00);
+        }
+
+        .arch-box.infra {
+            background: linear-gradient(135deg, #ff9a00, #ff6a00);
+        }
+
+        .arch-box.data {
+            background: linear-gradient(135deg, #1a365d, #2c5282);
+        }
+
+        .arch-box i {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .arch-box span {
+            font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+            font-weight: 500;
+        }
+
+        .arch-connector {
+            font-size: 1.5rem;
+            color: var(--text-light);
+        }
+
+        /* AWS Grid */
+        .aws-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .aws-service {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            text-align: center;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .aws-service i {
+            font-size: 1.5rem;
+            color: #ff9900;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .aws-service h4 {
+            font-size: clamp(0.85rem, 1.8vw, 1rem);
+            margin-bottom: 0.3rem;
+            color: var(--primary-color);
+        }
+
+        .aws-service p {
+            font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* Tables */
+        .cost-table,
+        .detail-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+        }
+
+        .cost-table th,
+        .detail-table th {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .cost-table td,
+        .detail-table td {
+            padding: 0.7rem 0.8rem;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        .cost-table tr:hover,
+        .detail-table tr:hover {
+            background: #f7fafc;
+        }
+
+        .cost-range,
+        .cost-cell {
+            text-align: right;
+            font-weight: 600;
+            color: var(--secondary-color);
+            white-space: nowrap;
+        }
+
+        .total-row,
+        .subtotal-row {
+            background: linear-gradient(to right, #ebf8ff, #e6fffa) !important;
+            font-weight: 600;
+        }
+
+        .total-row td,
+        .subtotal-row td {
+            border-bottom: none;
+            padding: 1rem 0.8rem;
+        }
+
+        .service-name {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .service-name i {
+            margin-right: 0.5rem;
+        }
+
+        .includes-list {
+            color: var(--text-light);
+        }
+
+        /* Timeline */
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            position: relative;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 5%;
+            right: 5%;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent-color), var(--success-color));
+            border-radius: 2px;
+            z-index: 0;
+        }
+
+        .timeline-item {
+            text-align: center;
+            z-index: 1;
+            flex: 1;
+            min-width: 80px;
+        }
+
+        .timeline-item .number {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin: 0 auto 0.5rem;
+            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
+        }
+
+        .timeline-item h4 {
+            font-size: clamp(0.85rem, 1.8vw, 1rem);
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-item p {
+            font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+            color: var(--text-light);
+        }
+
+        /* Progress Indicator */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent-color);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        /* Slide Counter */
+        .slide-counter {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Navigation Dots */
+        .nav-dots {
+            position: fixed;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 1000;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(26, 54, 93, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot:hover {
+            background: rgba(26, 54, 93, 0.6);
+        }
+
+        .nav-dot.active {
+            background: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        /* Scroll Hint */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-hint i {
+            font-size: 2rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .scroll-hint span {
+            display: block;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 0.3rem;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 1.5rem;
+            }
+
+            .nav-dots {
+                display: none;
+            }
+
+            .timeline::before {
+                display: none;
+            }
+
+            .timeline {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .timeline-item {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                text-align: left;
+                width: 100%;
+            }
+
+            .timeline-item .number {
+                margin: 0;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+                flex-shrink: 0;
+            }
+
+            .card-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cost-table,
+            .detail-table {
+                font-size: 0.8rem;
+            }
+
+            .cost-table th,
+            .detail-table th,
+            .cost-table td,
+            .detail-table td {
+                padding: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                padding: 1rem;
+            }
+
+            .slide-counter {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .arch-layer {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .arch-box {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+
+        /* Print */
+        @media print {
+            .presentation {
+                height: auto;
+                overflow: visible;
+            }
+
+            .slide {
+                page-break-after: always;
+                min-height: auto;
+                padding: 2rem;
+            }
+
+            .nav-dots,
+            .progress-bar,
+            .slide-counter,
+            .scroll-hint {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="nav-dots" id="navDots"></div>
+
+    <div class="slide-counter" id="slideCounter">1 / 18</div>
+
+    <div class="presentation" id="presentation">
+
+        <!-- SLIDE 1: Portada -->
+        <section class="slide title-slide" id="slide-1">
+            <div class="slide-content">
+                <div class="logo">
+                    <i class="fas fa-shield-halved"></i>
+                </div>
+                <h1>Plataforma Digital Integral</h1>
+                <!-- <p class="subtitle">Agencia de Asesores de Seguros</p> -->
+                <div class="tagline">
+                    <i class="fas fa-rocket"></i>&nbsp;&nbsp;
+                    Más que una app: una plataforma completa para operar, crecer y competir
+                </div>
+                <p style="margin-top: 2rem; opacity: 0.8;">
+                    Propuesta de Solución Tecnológica
+                </p>
+            </div>
+            <div class="scroll-hint">
+                <i class="fas fa-chevron-down"></i>
+                <span>Desliza para continuar</span>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: Contexto del Negocio -->
+        <section class="slide" id="slide-2">
+            <div class="slide-content">
+                <h2><i class="fas fa-building"></i> Contexto del Negocio</h2>
+                <div class="card-container">
+                    <div class="card danger">
+                        <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+                        <h3>Información Sensible</h3>
+                        <p>Datos personales de clientes, pólizas, documentos legales y financieros que requieren máxima protección.</p>
+                    </div>
+                    <div class="card warning">
+                        <div class="card-icon"><i class="fas fa-handshake"></i></div>
+                        <h3>Confianza del Cliente</h3>
+                        <p>La relación con el cliente se basa en la confianza. Una brecha de seguridad puede ser devastadora.</p>
+                    </div>
+                    <div class="card danger">
+                        <div class="card-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <h3>Impacto de Fallas</h3>
+                        <p>Una falla técnica puede paralizar operaciones y dañar la reputación construida.</p>
+                    </div>
+                </div>
+                <div class="highlight-box warning">
+                    <p><strong><i class="fas fa-lightbulb"></i> Por eso necesitamos una solución robusta desde el inicio:</strong><br>
+                    No podemos permitirnos improvisar cuando está en juego la información y confianza de sus clientes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: Problema a Resolver -->
+        <section class="slide" id="slide-3">
+            <div class="slide-content">
+                <h2><i class="fas fa-puzzle-piece"></i> Problema a Resolver</h2>
+                <div class="two-columns">
+                    <div class="column">
+                        <h3 style="color: var(--danger-color);"><i class="fas fa-times-circle"></i> Situación Actual</h3>
+                        <ul class="icon-list">
+                            <li>
+                                <i class="fas fa-mobile-alt" style="color: var(--danger-color);"></i>
+                                <div><strong>Sin movilidad</strong><span>Asesores sin herramientas en campo</span></div>
+                            </li>
+                            <li>
+                                <i class="fas fa-database" style="color: var(--danger-color);"></i>
+                                <div><strong>Información dispersa</strong><span>Datos en hojas de cálculo, correos, papel</span></div>
+                            </li>
+                            <li>
+                                <i class="fas fa-eye-slash" style="color: var(--danger-color);"></i>
+                                <div><strong>Sin visibilidad</strong><span>Difícil conocer el estado real del negocio</span></div>
+                            </li>
+                            <li>
+                                <i class="fas fa-unlink" style="color: var(--danger-color);"></i>
+                                <div><strong>Sistemas aislados</strong><span>Soluciones improvisadas sin integración</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3 style="color: var(--success-color);"><i class="fas fa-check-circle"></i> Lo que Necesitan</h3>
+                        <ul class="icon-list">
+                            <li>
+                                <i class="fas fa-mobile-alt" style="color: var(--success-color);"></i>
+                                <div><strong>Movilidad total</strong><span>Asesores productivos desde cualquier lugar</span></div>
+                            </li>
+                            <li>
+                                <i class="fas fa-database" style="color: var(--success-color);"></i>
+                                <div><strong>Información centralizada</strong><span>Una sola fuente de verdad</span></div>
+                            </li>
+                            <li>
+                                <i class="fas fa-chart-line" style="color: var(--success-color);"></i>
+                                <div><strong>Control operativo</strong><span>Visibilidad en tiempo real</span></div>
+                            </li>
+                            <li>
+                                <i class="fas fa-link" style="color: var(--success-color);"></i>
+                                <div><strong>Plataforma integrada</strong><span>Todo conectado y funcionando</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: Solución Propuesta -->
+        <section class="slide" id="slide-4">
+            <div class="slide-content">
+                <h2><i class="fas fa-lightbulb"></i> Solución Propuesta</h2>
+                <div class="card-container">
+                    <div class="card" style="border-top-color: #667eea;">
+                        <div class="card-icon" style="color: #667eea;"><i class="fas fa-mobile-alt"></i></div>
+                        <h3>App Móvil</h3>
+                        <p>Para asesores en campo</p>
+                        <ul>
+                            <li>Android e iOS</li>
+                            <li>Gestión de clientes</li>
+                            <li>Consulta de pólizas</li>
+                            <li>Captura de documentos</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-top-color: #38a169;">
+                        <div class="card-icon" style="color: #38a169;"><i class="fas fa-desktop"></i></div>
+                        <h3>CRM Web</h3>
+                        <p>Para operación interna</p>
+                        <ul>
+                            <li>Gestión centralizada</li>
+                            <li>Reportes y métricas</li>
+                            <li>Administración de usuarios</li>
+                            <li>Control de operaciones</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-top-color: #ed8936;">
+                        <div class="card-icon" style="color: #ed8936;"><i class="fas fa-server"></i></div>
+                        <h3>Backend</h3>
+                        <p>Motor del sistema</p>
+                        <ul>
+                            <li>Lógica de negocio</li>
+                            <li>Seguridad de datos</li>
+                            <li>Integraciones</li>
+                            <li>Escalabilidad</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-top-color: #3182ce;">
+                        <div class="card-icon" style="color: #3182ce;"><i class="fas fa-cloud"></i></div>
+                        <h3>Infraestructura AWS</h3>
+                        <p>Base sólida en la nube</p>
+                        <ul>
+                            <li>Alta disponibilidad</li>
+                            <li>Seguridad empresarial</li>
+                            <li>Respaldos automáticos</li>
+                            <li>Escalamiento flexible</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box success">
+                    <p><i class="fas fa-rocket"></i> <strong>Una plataforma pensada para durar y crecer</strong> — No es un desarrollo temporal, es la base tecnológica de su operación.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: Arquitectura -->
+        <section class="slide" id="slide-5">
+            <div class="slide-content">
+                <h2><i class="fas fa-sitemap"></i> Arquitectura de la Plataforma</h2>
+                <!-- <p class="subtitle">Vista ejecutiva simplificada</p> -->
+
+                <div class="architecture-container">
+                    <div class="arch-layer">
+                        <div class="arch-box mobile">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>App Móvil</span>
+                        </div>
+                        <div class="arch-box web">
+                            <i class="fas fa-desktop"></i>
+                            <span>CRM Web</span>
+                        </div>
+                    </div>
+
+                    <div class="arch-connector"><i class="fas fa-arrows-alt-v"></i></div>
+
+                    <div class="arch-layer">
+                        <div class="arch-box backend">
+                            <i class="fas fa-cogs"></i>
+                            <span>Backend Centralizado</span>
+                        </div>
+                    </div>
+
+                    <div class="arch-connector"><i class="fas fa-arrows-alt-v"></i></div>
+
+                    <div class="arch-layer">
+                        <div class="arch-box infra">
+                            <i class="fab fa-aws"></i>
+                            <span>Servicios AWS</span>
+                        </div>
+                        <div class="arch-box data">
+                            <i class="fas fa-database"></i>
+                            <span>Base de Datos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two-columns" style="margin-top: 1.5rem;">
+                    <div class="value-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <div class="content">
+                            <h4>Seguridad por Diseño</h4>
+                            <p>Cada capa protege la información</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                        <div class="content">
+                            <h4>Escalabilidad</h4>
+                            <p>Crece con su negocio sin rehacer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: Infraestructura AWS -->
+        <section class="slide" id="slide-6">
+            <div class="slide-content">
+                <h2><i class="fab fa-aws"></i> Infraestructura AWS</h2>
+                <p class="subtitle">El costo no es por "encender servicios" — es por <strong>diseñar correctamente</strong> la base del sistema</p>
+
+                <div class="aws-grid">
+                    <div class="aws-service">
+                        <i class="fas fa-door-open"></i>
+                        <h4>API Gateway</h4>
+                        <p>Controla y protege el acceso desde la app móvil</p>
+                    </div>
+                    <div class="aws-service">
+                        <i class="fas fa-bolt"></i>
+                        <h4>AWS Lambda (.NET 8)</h4>
+                        <p>Ejecuta lógica sin servidores, reduce costos operativos</p>
+                    </div>
+                    <div class="aws-service">
+                        <i class="fas fa-database"></i>
+                        <h4>Amazon Aurora</h4>
+                        <p>Base de datos confiable para información crítica</p>
+                    </div>
+                    <div class="aws-service">
+                        <i class="fas fa-archive"></i>
+                        <h4>Amazon S3</h4>
+                        <p>Almacenamiento seguro de documentos</p>
+                    </div>
+                    <div class="aws-service">
+                        <i class="fas fa-key"></i>
+                        <h4>Secrets Manager</h4>
+                        <p>Protección de credenciales y claves</p>
+                    </div>
+                    <div class="aws-service">
+                        <i class="fas fa-eye"></i>
+                        <h4>CloudWatch</h4>
+                        <p>Monitoreo y detección temprana de fallos</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <p><i class="fas fa-shield-alt"></i> <strong>Esta arquitectura reduce riesgos operativos</strong> y evita tener que rehacer el sistema en el futuro.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: Backend -->
+        <section class="slide" id="slide-7">
+            <div class="slide-content">
+                <h2><i class="fas fa-cogs"></i> Desarrollo Backend</h2>
+                <p class="subtitle">No es solo "conectar APIs" — es asegurar estabilidad y mantenibilidad</p>
+
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-brain"></i></div>
+                        <h3>Lógica de Negocio</h3>
+                        <p>Reglas específicas del negocio de seguros traducidas a código robusto y probado.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-plug"></i></div>
+                        <h3>Integraciones</h3>
+                        <p>Conexiones seguras con servicios externos, APIs de terceros y sistemas existentes.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-bug"></i></div>
+                        <h3>Manejo de Errores</h3>
+                        <p>Sistema preparado para detectar, registrar y recuperarse de fallos sin perder datos.</p>
+                    </div>
+                </div>
+
+                <div class="two-columns" style="margin-top: 1rem;">
+                    <div class="value-item">
+                        <i class="fas fa-lock"></i>
+                        <div class="content">
+                            <h4>Seguridad Integrada</h4>
+                            <p>Autenticación, autorización y encriptación en cada operación</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="content">
+                            <h4>Preparado para Crecer</h4>
+                            <p>Arquitectura que soporta más usuarios y funcionalidades</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: App Móvil -->
+        <section class="slide" id="slide-8">
+            <div class="slide-content">
+                <h2><i class="fas fa-mobile-alt"></i> Desarrollo App Móvil</h2>
+                <p class="subtitle">La cara del negocio ante los asesores</p>
+
+                <div class="two-columns">
+                    <div class="column">
+                        <ul class="icon-list">
+                            <li>
+                                <i class="fas fa-paint-brush" style="color: var(--accent-color);"></i>
+                                <div><strong>Experiencia de Usuario</strong><span>Diseño intuitivo que los asesores adoptan fácilmente</span></div>
+                            </li>
+                            <li>
+                                <i class="fas fa-shield-alt" style="color: var(--accent-color);"></i>
+                                <div><strong>Consumo Seguro de APIs</strong><span>Comunicación encriptada con el servidor</span></div>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-double" style="color: var(--accent-color);"></i>
+                                <div><strong>Validaciones</strong><span>Prevención de errores antes de enviar datos</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <ul class="icon-list">
+                            <li>
+                                <i class="fas fa-user-clock" style="color: var(--accent-color);"></i>
+                                <div><strong>Manejo de Sesiones</strong><span>Seguridad sin fricciones para el usuario</span></div>
+                            </li>
+                            <li>
+                                <i class="fas fa-mobile-alt" style="color: var(--accent-color);"></i>
+                                <div><strong>Android e iOS</strong><span>Compatible con el 99% de dispositivos del mercado</span></div>
+                            </li>
+                            <li>
+                                <i class="fas fa-sync" style="color: var(--accent-color);"></i>
+                                <div><strong>Sincronización</strong><span>Datos actualizados en tiempo real</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <p><i class="fas fa-star"></i> <strong>La app es la herramienta diaria de sus asesores</strong> — Su calidad impacta directamente en la productividad y satisfacción del equipo.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: CRM Web -->
+        <section class="slide" id="slide-9">
+            <div class="slide-content">
+                <h2><i class="fas fa-desktop"></i> Desarrollo CRM Web</h2>
+                <p class="subtitle">El centro de comando de su operación</p>
+
+                <div class="card-container">
+                    <div class="card highlight">
+                        <div class="card-icon" style="color: var(--success-color);"><i class="fas fa-bullseye"></i></div>
+                        <h3>Centro Operativo</h3>
+                        <p>Punto central donde converge toda la información y se toman decisiones.</p>
+                    </div>
+                    <div class="card highlight">
+                        <div class="card-icon" style="color: var(--success-color);"><i class="fas fa-database"></i></div>
+                        <h3>Control de Información</h3>
+                        <p>Gestión completa de clientes, pólizas, documentos y comunicaciones.</p>
+                    </div>
+                    <div class="card highlight">
+                        <div class="card-icon" style="color: var(--success-color);"><i class="fas fa-chart-pie"></i></div>
+                        <h3>Visibilidad del Negocio</h3>
+                        <p>Dashboards y reportes para conocer el estado real en tiempo real.</p>
+                    </div>
+                    <!-- <div class="card highlight">
+                        <div class="card-icon" style="color: var(--success-color);"><i class="fas fa-robot"></i></div>
+                        <h3>Automatización</h3>
+                        <p>Procesos repetitivos automatizados para reducir errores y ahorrar tiempo.</p>
+                    </div> -->
+                </div>
+
+                <!-- <div class="highlight-box warning">
+                    <p><i class="fas fa-exclamation-circle"></i> <strong>¿Por qué no un sitio web simple?</strong><br>
+                    Un CRM es una plataforma de trabajo intensivo que debe ser rápida, confiable y segura. Requiere arquitectura profesional.</p>
+                </div> -->
+            </div>
+        </section>
+
+        <!-- SLIDE 10: Pruebas -->
+        <section class="slide" id="slide-10">
+            <div class="slide-content">
+                <h2><i class="fas fa-vial"></i> Pruebas de Integración y Calidad</h2>
+                <!-- <p class="subtitle">Inversión que previene costos mayores en el futuro</p> -->
+
+                <div class="two-columns">
+                    <div class="column">
+                        <div class="value-item">
+                            <i class="fas fa-route"></i>
+                            <div class="content">
+                                <h4>Validación de Flujos Reales</h4>
+                                <p>Cada proceso del negocio probado de inicio a fin</p>
+                            </div>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-search"></i>
+                            <div class="content">
+                                <h4>Detección Temprana de Errores</h4>
+                                <p>Problemas encontrados antes de afectar usuarios</p>
+                            </div>
+                        </div>
+                        <div class="value-item">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <div class="content">
+                                <h4>Reducción de Incidencias</h4>
+                                <p>Menos soporte, menos correcciones urgentes</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="highlight-box danger">
+                            <h4 style="color: var(--danger-color);"><i class="fas fa-times-circle"></i> Sin pruebas:</h4>
+                            <ul>
+                                <li>Errores descubiertos por usuarios</li>
+                                <li>Correcciones urgentes costosas</li>
+                                <li>Pérdida de confianza</li>
+                                <li>Riesgo de datos corruptos</li>
+                            </ul>
+                        </div>
+                        <div class="highlight-box success">
+                            <h4 style="color: var(--success-color);"><i class="fas fa-check-circle"></i> Con pruebas:</h4>
+                            <ul>
+                                <li>Sistema validado antes de usar</li>
+                                <li>Confianza desde el día uno</li>
+                                <li>Menos soporte reactivo</li>
+                                <li>Datos íntegros</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: Publicación -->
+        <section class="slide" id="slide-11">
+            <div class="slide-content">
+                <h2><i class="fas fa-store"></i> Publicación en Android y iOS</h2>
+                <p class="subtitle">Proceso especializado con requisitos específicos</p>
+
+                <div class="card-container cards-2">
+                    <div class="card" style="border-top-color: #3DDC84;">
+                        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem;">
+                            <i class="fab fa-google-play" style="font-size: 2rem; color: #3DDC84;"></i>
+                            <h3 style="margin: 0;">Google Play Store</h3>
+                        </div>
+                        <ul>
+                            <li>Configuración de cuenta de desarrollador</li>
+                            <li>Preparación de assets y descripciones</li>
+                            <li>Configuración de firma de aplicación</li>
+                            <li>Cumplimiento de políticas de Google</li>
+                            <li>Gestión del proceso de revisión</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-top-color: #000;">
+                        <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem;">
+                            <i class="fab fa-apple" style="font-size: 2rem; color: #000;"></i>
+                            <h3 style="margin: 0;">App Store (Apple)</h3>
+                        </div>
+                        <ul>
+                            <li>Configuración de cuenta de desarrollador</li>
+                            <li>Generación de certificados y perfiles</li>
+                            <li>Preparación de screenshots</li>
+                            <li>Cumplimiento de Guidelines de Apple</li>
+                            <li>Gestión de revisión (más estricta)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight-box warning">
+                    <p><i class="fas fa-info-circle"></i> <strong>Importante:</strong> El servicio de publicación es independiente de las licencias de desarrollador (Google: ~$25 USD único, Apple: ~$99 USD/año). Las licencias las paga directamente el cliente.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: Detalle AWS -->
+        <section class="slide" id="slide-12">
+            <div class="slide-content">
+                <h2><i class="fab fa-aws"></i> Detalle: Infraestructura AWS (Setup)</h2>
+                <p class="subtitle">Configuración inicial: diseño, creación de recursos, seguridad y pruebas</p>
+
+                <table class="detail-table">
+                    <thead>
+                        <tr>
+                            <th>Servicio</th>
+                            <th>Qué incluye</th>
+                            <th>Costo (MXN)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="service-name"><i class="fas fa-bolt" style="color: #ff9900;"></i> Lambda (×4)</td>
+                            <td class="includes-list">Creación, configuración IAM, variables de entorno, logging, prueba básica</td>
+                            <td class="cost-cell">$16,000 – $24,000</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name"><i class="fas fa-eye" style="color: #ff9900;"></i> CloudWatch (×4)</td>
+                            <td class="includes-list">Log groups, retención, métricas básicas, alarmas (errores, throttling)</td>
+                            <td class="cost-cell">$6,000 – $10,000</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name"><i class="fas fa-calendar-alt" style="color: #ff9900;"></i> EventBridge</td>
+                            <td class="includes-list">Regla de eventos, targets configurados, prueba de eventos</td>
+                            <td class="cost-cell">$3,000 – $5,000</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name"><i class="fas fa-database" style="color: #ff9900;"></i> RDS Aurora</td>
+                            <td class="includes-list">Selección de engine, subredes, security groups, backups, conexión desde Lambda</td>
+                            <td class="cost-cell">$10,000 – $18,000</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name"><i class="fas fa-archive" style="color: #ff9900;"></i> S3 Bucket</td>
+                            <td class="includes-list">Políticas de acceso, versionado, acceso seguro desde Lambda</td>
+                            <td class="cost-cell">$3,000 – $5,000</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name"><i class="fas fa-door-open" style="color: #ff9900;"></i> API Gateway</td>
+                            <td class="includes-list">Endpoints, integración con Lambdas, autorización, deploy por stage</td>
+                            <td class="cost-cell">$6,000 – $10,000</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name"><i class="fas fa-key" style="color: #ff9900;"></i> Secrets Manager</td>
+                            <td class="includes-list">Creación de secrets, acceso desde Lambda, rotación</td>
+                            <td class="cost-cell">$2,000 – $4,000</td>
+                        </tr>
+                        <tr class="subtotal-row">
+                            <td colspan="2"><strong><i class="fab fa-aws" style="color: #ff9900;"></i> SUBTOTAL INFRAESTRUCTURA AWS</strong></td>
+                            <td class="cost-cell">$46,000 – $76,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="highlight-box">
+                    <p><i class="fas fa-info-circle"></i> El costo cubre el <strong>diseño y configuración profesional</strong>. Los costos de uso mensual de AWS se pagan aparte.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 13: Detalle Desarrollo -->
+        <section class="slide" id="slide-13">
+            <div class="slide-content">
+                <h2><i class="fas fa-code"></i> Detalle: Desarrollo y Servicios</h2>
+                <p class="subtitle">Arquitectura, lógica de negocio, interfaces y publicación</p>
+
+                <table class="detail-table">
+                    <thead>
+                        <tr>
+                            <th>Componente</th>
+                            <th>Qué incluye</th>
+                            <th>Costo (MXN)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="service-name"><i class="fas fa-server" style="color: #ed8936;"></i> Backend (×4 Lambda)</td>
+                            <td class="includes-list">Arquitectura, lógica de negocio, acceso a RDS, manejo de errores, DTOs, pruebas</td>
+                            <td class="cost-cell">$72,000 – $120,000</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name"><i class="fas fa-mobile-alt" style="color: #667eea;"></i> App Móvil (.NET MAUI)</td>
+                            <td class="includes-list">UI/UX, consumo de API, validaciones, manejo de sesión, build Android & iOS</td>
+                            <td class="cost-cell">$90,000 – $150,000</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name"><i class="fas fa-desktop" style="color: #38a169;"></i> CRM Web</td>
+                            <td class="includes-list">Interfaz administrativa, dashboards, gestión de datos, reportes, autenticación</td>
+                            <td class="cost-cell">$80,000 – $140,000</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name"><i class="fab fa-google-play" style="color: #3DDC84;"></i> Publicación Android</td>
+                            <td class="includes-list">Firma, build release, configuración Play Store, screenshots, publicación</td>
+                            <td class="cost-cell">$4,000 – $7,000</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name"><i class="fab fa-apple" style="color: #000;"></i> Publicación iOS</td>
+                            <td class="includes-list">Certificados, provisioning, build, App Store Connect, publicación</td>
+                            <td class="cost-cell">$6,000 – $10,000</td>
+                        </tr>
+                        <tr>
+                            <td class="service-name"><i class="fas fa-vial" style="color: #805ad5;"></i> Pruebas QA</td>
+                            <td class="includes-list">Pruebas funcionales, integración app↔backend, casos de error, correcciones</td>
+                            <td class="cost-cell">$15,000 – $25,000</td>
+                        </tr>
+                        <tr class="subtotal-row">
+                            <td colspan="2"><strong><i class="fas fa-code" style="color: var(--primary-color);"></i> SUBTOTAL DESARROLLO Y SERVICIOS</strong></td>
+                            <td class="cost-cell">$267,000 – $452,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="highlight-box warning">
+                    <p><i class="fas fa-exclamation-triangle"></i> <strong>Nota:</strong> Las licencias de tiendas (Google ~$25 USD, Apple ~$99 USD/año) las paga directamente el cliente.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 14: Resumen de Costos -->
+        <section class="slide" id="slide-14">
+            <div class="slide-content">
+                <h2><i class="fas fa-file-invoice-dollar"></i> Resumen de Costos</h2>
+                <p class="subtitle">Servicios profesionales — Inversión única de desarrollo</p>
+
+                <table class="cost-table">
+                    <thead>
+                        <tr>
+                            <th>Concepto</th>
+                            <th>Incluye</th>
+                            <th>Rango (MXN)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fab fa-aws" style="color: #ff9900;"></i> <strong>Infraestructura AWS</strong></td>
+                            <td>Diseño, configuración, seguridad y pruebas</td>
+                            <td class="cost-range">$46,000 – $76,000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-server" style="color: #ed8936;"></i> <strong>Desarrollo Backend</strong></td>
+                            <td>Lógica de negocio, integraciones, estabilidad</td>
+                            <td class="cost-range">$72,000 – $120,000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-mobile-alt" style="color: #667eea;"></i> <strong>Desarrollo App Móvil</strong></td>
+                            <td>UX, funcionalidad, compatibilidad multiplataforma</td>
+                            <td class="cost-range">$90,000 – $150,000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-desktop" style="color: #38a169;"></i> <strong>Desarrollo CRM Web</strong></td>
+                            <td>Plataforma central del negocio</td>
+                            <td class="cost-range">$80,000 – $140,000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fab fa-google-play" style="color: #3DDC84;"></i> <strong>Publicación Android</strong></td>
+                            <td>Preparación y despliegue en Play Store</td>
+                            <td class="cost-range">$4,000 – $7,000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fab fa-apple" style="color: #000;"></i> <strong>Publicación iOS</strong></td>
+                            <td>Certificados y despliegue en App Store</td>
+                            <td class="cost-range">$6,000 – $10,000</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-vial" style="color: #805ad5;"></i> <strong>Pruebas de Calidad</strong></td>
+                            <td>Validación integral del sistema</td>
+                            <td class="cost-range">$15,000 – $25,000</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="2"><strong><i class="fas fa-calculator"></i> TOTAL ESTIMADO</strong></td>
+                            <td class="cost-range" style="font-size: 1.1em;">$313,000 – $528,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 15: Qué Incluye -->
+        <section class="slide" id="slide-15">
+            <div class="slide-content">
+                <h2><i class="fas fa-check-circle"></i> Qué Incluye el Presupuesto</h2>
+
+                <div class="card-container">
+                    <div class="card highlight">
+                        <div class="card-icon" style="color: var(--success-color);"><i class="fas fa-drafting-compass"></i></div>
+                        <h3>Arquitectura Profesional</h3>
+                        <p>Diseño pensado para escalar, mantener y evolucionar. No soluciones improvisadas.</p>
+                    </div>
+                    <div class="card highlight">
+                        <div class="card-icon" style="color: var(--success-color);"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Seguridad desde el Diseño</h3>
+                        <p>Protección de datos integrada en cada componente, no añadida después.</p>
+                    </div>
+                    <div class="card highlight">
+                        <div class="card-icon" style="color: var(--success-color);"><i class="fas fa-server"></i></div>
+                        <h3>Infraestructura Productiva</h3>
+                        <p>Ambiente listo para operar con estándares empresariales.</p>
+                    </div>
+                </div>
+
+                <div class="two-columns" style="margin-top: 1rem;">
+                    <div class="value-item">
+                        <i class="fas fa-code"></i>
+                        <div class="content">
+                            <h4>Código Entregable</h4>
+                            <p>Todo el código fuente es de su propiedad</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <i class="fas fa-book"></i>
+                        <div class="content">
+                            <h4>Buenas Prácticas</h4>
+                            <p>Estándares de industria para mantenibilidad</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 16: Qué NO Incluye -->
+        <section class="slide" id="slide-16">
+            <div class="slide-content">
+                <h2><i class="fas fa-times-circle"></i> Qué NO Incluye</h2>
+                <p class="subtitle">Para transparencia total sobre costos adicionales</p>
+
+                <div class="card-container">
+                    <div class="card danger">
+                        <div class="card-icon" style="color: var(--danger-color);"><i class="fab fa-aws"></i></div>
+                        <h3>Costos Mensuales AWS</h3>
+                        <p>Los servicios de AWS generan cobros mensuales por uso. Estimación inicial: <strong>$3,000 - $8,000 MXN/mes</strong> dependiendo del tráfico.</p>
+                        <p style="margin-top: 0.5rem;"><i class="fas fa-info-circle"></i> Se pagan directamente a Amazon</p>
+                    </div>
+                    <div class="card danger">
+                        <div class="card-icon" style="color: var(--danger-color);"><i class="fas fa-id-card"></i></div>
+                        <h3>Licencias de Tiendas</h3>
+                        <ul>
+                            <li><strong>Google Play:</strong> ~$25 USD (único)</li>
+                            <li><strong>Apple Developer:</strong> ~$99 USD/año</li>
+                        </ul>
+                        <p style="margin-top: 0.5rem;"><i class="fas fa-info-circle"></i> Se pagan directamente a Google/Apple</p>
+                    </div>
+                    <div class="card warning">
+                        <div class="card-icon" style="color: var(--warning-color);"><i class="fas fa-headset"></i></div>
+                        <h3>Soporte Posterior</h3>
+                        <p>Mantenimiento, actualizaciones y soporte técnico después de la entrega.</p>
+                        <p style="margin-top: 0.5rem;"><i class="fas fa-info-circle"></i> Cotizable por separado según necesidades</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <p><i class="fas fa-handshake"></i> <strong>Transparencia total:</strong> Preferimos ser claros desde el inicio sobre todos los costos para evitar sorpresas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 17: Estrategia -->
+        <section class="slide" id="slide-17">
+            <div class="slide-content">
+                <h2><i class="fas fa-route"></i> Estrategia de Implementación</h2>
+                <p class="subtitle">Implementación por fases para menor riesgo y resultados tempranos</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="number">1</div>
+                        <div>
+                            <h4>Infraestructura</h4>
+                            <p>Base sólida en AWS</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="number">2</div>
+                        <div>
+                            <h4>Backend</h4>
+                            <p>Motor del sistema</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="number">3</div>
+                        <div>
+                            <h4>CRM Web</h4>
+                            <p>Operación interna</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="number">4</div>
+                        <div>
+                            <h4>App Móvil</h4>
+                            <p>Asesores en campo</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="number">5</div>
+                        <div>
+                            <h4>Pruebas</h4>
+                            <p>Validación integral</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="number">6</div>
+                        <div>
+                            <h4>Lanzamiento</h4>
+                            <p>Publicación</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two-columns">
+                    <div class="highlight-box success">
+                        <h4><i class="fas fa-check"></i> Beneficios del enfoque por fases:</h4>
+                        <ul>
+                            <li>Menor inversión inicial de riesgo</li>
+                            <li>Validación temprana de funcionalidad</li>
+                            <li>Ajustes durante el desarrollo</li>
+                            <li>Entregables tangibles en cada fase</li>
+                        </ul>
+                    </div>
+                    <div class="highlight-box">
+                        <h4><i class="fas fa-seedling"></i> Base para crecimiento:</h4>
+                        <ul>
+                            <li>Nuevas funcionalidades sin rehacer</li>
+                            <li>Más usuarios sin degradación</li>
+                            <li>Integraciones futuras facilitadas</li>
+                            <li>Evolución continua del producto</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 18: Final -->
+        <section class="slide final-slide" id="slide-18">
+            <div class="slide-content">
+                <h2><i class="fas fa-handshake"></i> Inversión en su Futuro</h2>
+
+                <div class="message-box">
+                    <p style="font-size: clamp(1.1rem, 2.5vw, 1.4rem); margin-bottom: 1rem;">
+                        Este presupuesto no es solo por <strong>"desarrollo de una app"</strong>
+                    </p>
+                    <p style="font-size: clamp(1rem, 2vw, 1.2rem);">
+                        Es una inversión en:
+                    </p>
+                    <div class="final-icons-grid">
+                        <div class="final-icon-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <p><strong>Estabilidad</strong></p>
+                        </div>
+                        <div class="final-icon-item">
+                            <i class="fas fa-lock"></i>
+                            <p><strong>Seguridad</strong></p>
+                        </div>
+                        <div class="final-icon-item">
+                            <i class="fas fa-handshake"></i>
+                            <p><strong>Confianza</strong></p>
+                        </div>
+                        <div class="final-icon-item">
+                            <i class="fas fa-chart-line"></i>
+                            <p><strong>Crecimiento</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="margin-top: 2rem; font-size: clamp(1rem, 2vw, 1.2rem);">
+                    <i class="fas fa-quote-left" style="opacity: 0.5;"></i>
+                    Una plataforma profesional que protege su información,<br>
+                    empodera a sus asesores y escala con su negocio.
+                    <i class="fas fa-quote-right" style="opacity: 0.5;"></i>
+                </p>
+
+                <p style="margin-top: 2rem; opacity: 0.8;">
+                    <i class="fas fa-envelope"></i> ¿Preguntas? Estamos para resolver cualquier duda.
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Configuration
+        const totalSlides = 18;
+        const presentation = document.getElementById('presentation');
+        const progressBar = document.getElementById('progressBar');
+        const slideCounter = document.getElementById('slideCounter');
+        const navDotsContainer = document.getElementById('navDots');
+
+        // Create navigation dots
+        for (let i = 1; i <= totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'nav-dot' + (i === 1 ? ' active' : '');
+            dot.setAttribute('data-slide', i);
+            dot.addEventListener('click', () => scrollToSlide(i));
+            navDotsContainer.appendChild(dot);
+        }
+
+        // Scroll to specific slide
+        function scrollToSlide(slideNumber) {
+            const slide = document.getElementById(`slide-${slideNumber}`);
+            if (slide) {
+                slide.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Update UI based on scroll position
+        function updateUI() {
+            const scrollTop = presentation.scrollTop;
+            const scrollHeight = presentation.scrollHeight - presentation.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+
+            // Update progress bar
+            progressBar.style.width = `${progress}%`;
+
+            // Calculate current slide
+            const slideHeight = presentation.clientHeight;
+            const currentSlide = Math.round(scrollTop / slideHeight) + 1;
+
+            // Update counter
+            slideCounter.textContent = `${Math.min(currentSlide, totalSlides)} / ${totalSlides}`;
+
+            // Update dots
+            document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index + 1 === currentSlide);
+            });
+        }
+
+        // Listen to scroll
+        presentation.addEventListener('scroll', updateUI);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const slideHeight = presentation.clientHeight;
+            const currentSlide = Math.round(presentation.scrollTop / slideHeight) + 1;
+
+            if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+                e.preventDefault();
+                if (currentSlide < totalSlides) {
+                    scrollToSlide(currentSlide + 1);
+                }
+            } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                if (currentSlide > 1) {
+                    scrollToSlide(currentSlide - 1);
+                }
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                scrollToSlide(1);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                scrollToSlide(totalSlides);
+            }
+        });
+
+        // Initial UI update
+        updateUI();
+    </script>
+</body>
+</html>
